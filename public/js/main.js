@@ -284,6 +284,13 @@ function createTableAndAddContent(products, numberOfTblColumns) {
     return $tbl;
 }
 
+function createTableAndAddContent_2(products, numberOfTblColumns) {
+    let $tbl = $("<table></table>");
+    createTableHeadAndAppend($tbl, numberOfTblColumns);
+    createTableBodyAndAppend($tbl, products, numberOfTblColumns);
+    $tbl.insertAfter('h1');
+}
+
 function createTableHeadAndAppend($tbl, numberOfTblColumns) {
     let tblHeadContent = defineTableHeaderContent(numberOfTblColumns),
         $tblHead = $("<thead></thead>"),
@@ -411,7 +418,8 @@ $('.popup-form').submit(function (e) {
         data: user,
         async: false,
         success: function (jsonProd) {
-            saveCheck();
+            saveCheck(jsonProd);
+            // console.log(jsonProd);
             window.location.replace('/');
         },
         error: function (xhr, ajaxOptions, thrownError) {
@@ -423,6 +431,30 @@ $('.popup-form').submit(function (e) {
 
     return false;
 });
+
+function saveCheck(data) {
+    let updData = {
+        date: new Date(),
+        product: data.product.name,
+        price: data.product.price * $('#quantity').val(),
+        customer: data.user.name
+    };
+
+    $.ajax({
+        url: "http://localhost:3000/checkList",
+        method: 'POST',
+        data: updData,
+        async: false,
+        success: function (jsonProd) {
+            // window.location.replace('/');
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status);
+            console.log(thrownError);
+            alert(xhr.responseText);
+        }
+    });
+}
 
 function setProductInputs(data) {
     $.ajax({
@@ -458,6 +490,33 @@ function quantityValidation_1(value) {
     setValidationMsg(input, issueArr)
 }
 
-if (window.location.href != 'http://localhost:3000/') {
+if (window.location.href != 'http://localhost:3000/' && window.location.href != 'http://localhost:3000/check') {
     setProductInputs(id);
+}
+
+if (window.location.href == 'http://localhost:3000/check') {
+    $.ajax({
+        url: "http://localhost:3000/getCheckList",
+        method: 'POST',
+        async: false,
+        success: function (jsonProd) {
+            let numberOfProducts = jsonProd.length,
+                buffer,
+                productValues = [];
+
+            let list = [];
+            for (let i = 0; i < numberOfProducts; i++) {
+                productValues = Object.values(jsonProd[i]);
+                buffer = new Product(...productValues);
+                list.push(productValues);
+            }
+            createTableAndAddContent_2(list, 4);
+
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status);
+            console.log(thrownError);
+            alert(xhr.responseText);
+        }
+    });
 }

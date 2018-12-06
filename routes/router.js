@@ -3,11 +3,16 @@ const router = express.Router();
 const path = require('path');
 const Product = require('../models/product');
 const User = require('../models/user');
+const Check = require('../models/check');
 
 let buffer;
 
 router.get('/', function (req, res, next) {
     res.sendFile(path.resolve(__dirname + '/../views/main.html'));
+});
+
+router.get('/check', function (req, res, next) {
+    res.sendFile(path.resolve(__dirname + '/../views/check.html'));
 });
 
 router.get('/product/:productid', function (req, res, next) {
@@ -77,25 +82,25 @@ router.post('/getProductFromId', function (req, res, next) {
 });
 
 router.post('/updateBalance', function (req, res, next) {
-    User.findOne({ card_number: req.body.card_number }, function (error, product) {
+    User.findOne({ card_number: req.body.card_number }, function (error, user) {
         if (error) {
             return next(error);
         } else {
-            if (product === null) {
-                var err = new Error('Product doesn\'t exist');
+            if (user === null) {
+                var err = new Error('user doesn\'t exist');
                 res.status(400);
                 res.send('User doesn\'t exist');
                 return next(err);
             } else {
-                let balance = product.balance - req.body.balance;
+                let balance = user.balance - req.body.balance;
                 if (balance < 0) {
                     res.status(400).send('Недостаточно средств');
                     return;
                 }
-                product.balance = balance;
-                product.save();
+                user.balance = balance;
+                user.save();
                 res.status(200);
-                
+
                 Product.findOne({ name: req.body.name }, function (error, product) {
                     if (error) {
                         return next(error);
@@ -107,7 +112,7 @@ router.post('/updateBalance', function (req, res, next) {
                             let quantity = product.quantity - req.body.quantity;
                             product.quantity = quantity;
                             product.save();
-                            res.send('easy');
+                            res.send({ user: user, product: product });
                         }
                     }
                 });
@@ -115,5 +120,33 @@ router.post('/updateBalance', function (req, res, next) {
         }
     });
 });
+
+router.post('/checkList', function (req, res, next) {
+    console.log(req.body);
+    try {
+        Check.create(req.body, function () { });
+    } catch (err) {
+        console.error(err)
+    }
+    res.send('easy, my friend');
+});
+
+router.post('/getCheckList', function (req, res, next) {
+    let checkList = [];
+    Check.find({}, function (error, check) {
+        if (error) {
+            return next(error);
+        } else if (!check) {
+            return next(new Error("check not found"))
+        }
+        for (const prop in check) {
+            let object = check[prop];
+            let product = (({ date, product, price, customer }) => ({ date, product, price, customer }))(object);
+            checkList.push(product)
+        }
+        res.send(checkList);
+    });
+});
+
 
 module.exports = router;

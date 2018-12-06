@@ -13,6 +13,7 @@ const userContents = fs.readFileSync('jsonData/user.json', 'utf8');
 try {
     const data = JSON.parse(fileContents);
     for (let i = 0; i < data.length; i++) {
+        console.log(data[i]);
         Product.create(data[i], function () { });
     }
 } catch (err) {
