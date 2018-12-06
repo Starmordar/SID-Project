@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "name": "iPhone 6s",
+        "price": 600,
+        "quantity": 5
+    },
+    {
+        "id": 2,
+        "name": "Samsung Galaxy S7",
+        "price": 550,
+        "quantity": 7
+    },
+    {
+        "id": 3,
+        "name": "Macbook",
+        "price": 1700,
+        "quantity": 7
+    },
+    {
+        "id": 4,
+        "name": "Asus",
+        "price": 350,
+        "quantity": 8
+    },
+    {
+        "id": 5,
+        "name": "Acer",
+        "price": 500,
+        "quantity": 13
+    },
+    {
+        "id": 6,        
+        "name": "TP-Link",
+        "price": 200,
+        "quantity": 9
+    },
+    {
+        "id": 7,
+        "name": "iPhone X",
+        "price": 1100,
+        "quantity": 2
+    },
+    {
+        "id": 8,
+        "name": "Samsung Galaxy Note Boom",
+        "price": 900,
+        "quantity": 3
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "card_number": "1234-4567-7890-6431",
+        "name": "Sanya",
+        "surname": "Uho",
+        "valid_thru": "14/22",
+        "CCV2": "321",
+        "balance": "325"
+    },
+    {
+        "card_number": "9415-3298-0043-1276",
+        "name": "Johnny",
+        "surname": "Cash",
+        "valid_thru": "15/19",
+        "CCV2": "154",
+        "balance": "594"
+    },
+    {
+        "card_number": "8834-9743-7120-3231",
+        "name": "Electronic",
+        "surname": "S1mple",
+        "valid_thru": "29/21",
+        "CCV2": "940",
+        "balance": "76500"
+    }
+]

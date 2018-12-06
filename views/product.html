@@ -1,0 +1,60 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="http://localhost:3000/styles/main.css">
+    <link rel="stylesheet" href="http://localhost:3000/styles/animate.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <button type="button" class="back">Back back back</button>
+    <div class="containe">
+        <div class="right split">
+            <form class="buy-some" name="buy-some">
+                <h2>Create new product</h2>
+                <ul class="noBullet">
+                    <li>
+                        <label for="name"></label>
+                        <input type="name" class="inputFields" id="name" name="name" placeholder="name" value=""
+                            disabled />
+                    </li>
+                    <li>
+                        <label for="price"></label>
+                        <input type="price" class="inputFields" id="price" name="price" placeholder="price" value=""
+                            disabled />
+                    </li>
+                    <li>
+                        <label for="quantity"></label>
+                        <input type="quantity" class="inputFields" id="quantity" name="quantity" placeholder="quantity"
+                            value="" oninput="return quantityValidation_1(this.value)" required />
+                    </li>
+                    <li id="center-btn">
+                        <input type="submit" id="join-btn" name="join" alt="Join" value="Buy It">
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <div class="left split">
+            <div class="padding">
+                <div id="contactForm" style="visibility: visible; animation-delay: 1s; animation-name: fadeInUp;">
+
+                    <form action="#" class="popup-form">
+                        <input class="inputFields" placeholder="card_number" type="text" value="" name="card_number"
+                            required />
+                        <input class="inputFields" placeholder="Name" type="text" value="" name="name" required />
+                        <input class="inputFields" placeholder="Surname" type="text" value="" name="surname" required />
+                        <input class="inputFields" placeholder="valid_thru" type="text" value="" name="valid_thru"
+                            required />
+                        <input class="inputFields" placeholder="CCV2" type="text" value="" name="CCV2" required />
+                        <input class="inputFields" placeholder="balance" type="text" id="buy-price" value="" name="balance"
+                            disabled />
+                        <input class="inputFields" class="formBtn" type="submit" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="http://localhost:3000/js/main.js"></script>
+</body>
+
+</html>

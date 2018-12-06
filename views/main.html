@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/main.css">
+    <title>SID shop</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <button type="button" class="reload"><span>Reload page &#8594;</span></button>
+    <div class="create-tbl">
+        <div class="wrapper">
+            <button type="button" class="two-clm" data-colm="2">Name, Price</button>
+            <button type="button" class="three-clm" data-colm="3">Name, Price, Quality</button>
+            <button type="button" class="four-clm" data-colm="4">Id, Name, Price, Quality</button>
+        </div>
+    </div>
+    <div class="container">
+        <div class="right split">
+            <form class="addProdForm" name="addProdform">
+                <h2>Create new product</h2>
+                <ul class="noBullet">
+                    <li>
+                        <label for="id"></label>
+                        <input type="text" class="inputFields" id="id" name="id" placeholder="id" value="" oninput="return idValidation(this.value)"
+                            required />
+                    </li>
+                    <li>
+                        <label for="name"></label>
+                        <input type="name" class="inputFields" id="name" name="name" placeholder="name" value="" oninput="return nameValidation(this.value)"
+                            required />
+                    </li>
+                    <li>
+                        <label for="price"></label>
+                        <input type="price" class="inputFields" id="price" name="price" placeholder="price" value="" oninput="return priceValidation(this.value)"
+                            required />
+                    </li>
+                    <li>
+                        <label for="quantity"></label>
+                        <input type="quantity" class="inputFields" id="quantity" name="quantity" placeholder="quantity" value="" oninput="return quantityValidation(this.value)" required />
+                    </li>
+                    <li id="center-btn">
+                        <input type="submit" id="join-btn" name="join" alt="Join" value="Join">
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <div class="left split">
+            <div class="padding">
+                
+                <button type="button" class="buy-product">Buy product</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
